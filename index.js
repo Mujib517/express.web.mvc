@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('express-hbs');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,6 +23,8 @@ app.use(express.static(__dirname + "/lib"));
 app.listen(port, function () {
     console.log("Server is running on " + port);
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 mongoose.connect(config.conStr);
 

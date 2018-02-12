@@ -1,1 +1,15 @@
 <h1>Products</h1>
+<a href="/products/new" class="btn btn-danger">Add New Product</a>
+{{#each products}}
+<div class="well">
+    <a href="/products/{{_id}}">
+        <h3>{{brand}} {{model}}</h3>
+    </a>
+    <div>{{lastUpdated}}</div>
+    <div>
+        <form method="POST" action="/products/remove/{{_id}}">
+            <button class="btn btn-sm btn-danger">Remove</button>
+        </form>
+    </div>
+</div>
+{{/each}}
