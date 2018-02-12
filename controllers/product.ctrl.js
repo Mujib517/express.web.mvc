@@ -1,4 +1,5 @@
 const Product = require("../models/product.model");
+const Review = require("../models/review.model");
 
 class ProductCtrl {
     get(req, res) {
@@ -19,9 +20,17 @@ class ProductCtrl {
         Product.findById(id)
             .exec()
             .then(function (product) {
-                res.render("pages/product", { product: product });
+                Review.find({ productId: id }, { '__v': 0 })
+                    .exec()
+                    .then(function (reviews) {
+                        console.log("reviews ", reviews);
+                        var jsonProduct = product.toJSON();
+                        jsonProduct.reviews = reviews;
+                        res.render("pages/product", { product: jsonProduct });
+                    });
             })
             .catch(function (err) {
+                console.log(err);
                 res.render("pages/error");
             });
     }

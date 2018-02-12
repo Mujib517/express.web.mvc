@@ -1,13 +1,33 @@
-<div class="col-md-5">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            {{product.brand}} {{product.model}}
-        </div>
-        <div class="panel-body">
-            <div>$ {{product.price}}</div>
-        </div>
-        <div class="panel-footer">
-            {{product.lastUpdated}}
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                {{product.brand}} {{product.model}}
+            </div>
+            <div class="panel-body">
+                <div>$ {{product.price}}</div>
+            </div>
+            <div class="panel-footer">
+                {{product.lastUpdated}}
+            </div>
         </div>
     </div>
+</div>
+<div class="row">
+    {{#if product.reviews}}
+    <h1>Reviews</h1>
+    {{else}}
+    <h3>Be the first one to review</h3>
+    {{/if}} 
+    
+    
+    {{#each product.reviews}}
+    <div>
+        <h3>{{name}} {{rating}}*</h3>
+        <h4>{{subject}}</h4>
+        <div>{{message}}</div>
+        <div>{{lastUpdated}}</div>
+        <hr/>
+    </div>
+    {{/each}}
 </div>
