@@ -23,7 +23,6 @@ class ProductCtrl {
                 Review.find({ productId: id }, { '__v': 0 })
                     .exec()
                     .then(function (reviews) {
-                        console.log("reviews ", reviews);
                         var jsonProduct = product.toJSON();
                         jsonProduct.reviews = reviews;
                         res.render("pages/product", { product: jsonProduct });
