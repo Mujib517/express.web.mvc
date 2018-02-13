@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const config = require('../config');
+const UserCtrl = require('../controllers/user.ctrl');
 
 module.exports = {
     configure: function (app) {
@@ -20,8 +21,7 @@ module.exports = {
         });
 
         passport.use("local-login", new LocalStrategy(function (username, password, done) {
-            if (username === 'admin' && password === 'admin') done(null, { username: "admin" });
-            else done("Wrong username or password");
+            UserCtrl.validate(username, password, done);
         }));
 
     }
