@@ -1,0 +1,9 @@
+extend ../index 
+
+block content
+    .col-md-5
+        each product in products
+            .well
+                h3= product.brand
+                h5 Pirce $ #{product.price}
+                div= product.lastUpdated
