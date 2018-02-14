@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Chat App</h1>
+    <div>
+        <div id="msgs"></div>
+        <input id="msg" type="text" place="Enter your message">
+        <button onclick="send()">Send</button>
+    </div>
+    <script>
+        var ws = new WebSocket("ws://localhost:3000");
+        ws.onmessage = function (msg) {
+            var div = document.createElement('div');
+            div.innerText = msg.data;
+
+            var msgs = document.getElementById("msgs");
+            msgs.appendChild(div);
+        }
+
+        function send() {
+            var msg = document.getElementById("msg");
+            ws.send(msg.value);
+            msg.value = "";
+        }
+    </script>
+</body>
+
+</html>
